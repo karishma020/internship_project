@@ -34,7 +34,7 @@ export default function Footer() {
           <div>
             <div className="section-label text-cream/40 mb-4">Contact</div>
             <ul className="space-y-3 font-body text-sm text-cream/60 font-light">
-              <li>hello@kohi.coffee</li>
+              <li>karishma.cs22@sahyadri.edu.in</li>
               <li>+91 98765 43210</li>
               <li className="leading-relaxed">12 Roastery Lane<br />Bengaluru, Karnataka<br />India 560001</li>
             </ul>
