@@ -5,14 +5,37 @@ import { MapPin, Phone, Mail, Instagram, Twitter } from 'lucide-react'
 export default function Contact() {
   const r1 = useScrollAnimation()
   const r2 = useScrollAnimation()
-  const [status, setStatus] = useState('idle') // idle | sending | sent
 
-  const handleSubmit = (e) => {
+  const [form, setForm] = useState({ name: '', email: '', subject: 'General enquiry', message: '' })
+  const [status, setStatus] = useState('idle')
+
+  const handleChange = (e) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('sending')
-    setTimeout(() => {
-      setStatus('sent')
-    }, 1500)
+
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (res.ok) {
+        setStatus('sent')
+        setForm({ name: '', email: '', subject: 'General enquiry', message: '' })
+      } else {
+        const err = await res.json()
+        console.error('Resend error:', err)
+        setStatus('error')
+      }
+    } catch (err) {
+      console.error('Network error:', err)
+      setStatus('error')
+    }
   }
 
   return (
@@ -29,7 +52,6 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
 
-          {/* Info */}
           <div ref={r2} className="fade-up space-y-10">
             <div>
               <div className="font-mono text-xs text-caramel/50 uppercase tracking-widest2 mb-4">For customers</div>
@@ -64,12 +86,11 @@ export default function Contact() {
                 <Mail size={16} className="text-gold flex-shrink-0" strokeWidth={1.5} />
                 <div>
                   <div className="font-mono text-xs text-caramel/40 uppercase tracking-widest2 mb-1">Email</div>
-                  <a href="mailto:hello@kohi.coffee" className="font-body text-sm text-caramel hover:text-espresso transition-colors">hello@kohi.coffee</a>
+                  <a href="mailto:karishma.cs22@sahyadri.edu.in" className="font-body text-sm text-caramel hover:text-espresso transition-colors">karishma.cs22@sahyadri.edu.in</a>
                 </div>
               </div>
             </div>
 
-            {/* Social */}
             <div>
               <div className="font-mono text-xs text-caramel/40 uppercase tracking-widest2 mb-4">Follow our journey</div>
               <div className="flex gap-4">
@@ -82,7 +103,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Hours */}
             <div className="bg-parchment px-6 py-6 border-l-2 border-gold">
               <div className="font-mono text-xs text-caramel/40 uppercase tracking-widest2 mb-3">Roastery hours</div>
               <div className="space-y-1.5 font-body text-sm text-caramel font-light">
@@ -93,7 +113,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Form */}
           <div>
             {status === 'sent' ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-20 bg-parchment px-8">
@@ -109,7 +128,10 @@ export default function Contact() {
                     <label className="font-mono text-xs text-caramel/50 uppercase tracking-widest2 block mb-2">Name</label>
                     <input
                       type="text"
+                      name="name"
                       required
+                      value={form.name}
+                      onChange={handleChange}
                       placeholder="Your name"
                       className="w-full bg-transparent border border-parchment px-4 py-3 font-body text-sm text-espresso placeholder-caramel/30 focus:outline-none focus:border-gold transition-colors"
                     />
@@ -118,7 +140,10 @@ export default function Contact() {
                     <label className="font-mono text-xs text-caramel/50 uppercase tracking-widest2 block mb-2">Email</label>
                     <input
                       type="email"
+                      name="email"
                       required
+                      value={form.email}
+                      onChange={handleChange}
                       placeholder="your@email.com"
                       className="w-full bg-transparent border border-parchment px-4 py-3 font-body text-sm text-espresso placeholder-caramel/30 focus:outline-none focus:border-gold transition-colors"
                     />
@@ -127,7 +152,12 @@ export default function Contact() {
 
                 <div>
                   <label className="font-mono text-xs text-caramel/50 uppercase tracking-widest2 block mb-2">Subject</label>
-                  <select className="w-full bg-mist border border-parchment px-4 py-3 font-body text-sm text-caramel focus:outline-none focus:border-gold transition-colors appearance-none">
+                  <select
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
+                    className="w-full bg-mist border border-parchment px-4 py-3 font-body text-sm text-caramel focus:outline-none focus:border-gold transition-colors appearance-none"
+                  >
                     <option>General enquiry</option>
                     <option>Wholesale / B2B</option>
                     <option>Subscription</option>
@@ -140,12 +170,21 @@ export default function Contact() {
                 <div>
                   <label className="font-mono text-xs text-caramel/50 uppercase tracking-widest2 block mb-2">Message</label>
                   <textarea
+                    name="message"
                     required
                     rows={6}
+                    value={form.message}
+                    onChange={handleChange}
                     placeholder="Tell us what's on your mind..."
                     className="w-full bg-transparent border border-parchment px-4 py-3 font-body text-sm text-espresso placeholder-caramel/30 focus:outline-none focus:border-gold transition-colors resize-none"
                   />
                 </div>
+
+                {status === 'error' && (
+                  <p className="font-mono text-xs text-red-500">
+                    Something went wrong. Please try again or email us directly.
+                  </p>
+                )}
 
                 <button
                   type="submit"
