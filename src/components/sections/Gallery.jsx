@@ -5,10 +5,10 @@ const images = [
   { src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80', alt: 'Pour over coffee', tall: false },
   { src: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80', alt: 'Espresso shot', tall: false },
   { src: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&q=80', alt: 'Coffee roasting', tall: true },
-  { src: 'https://images.unsplash.com/photo-1559056961-1f4a52b034d0?w=600&q=80', alt: 'Coffee cherries', tall: false },
-  { src: 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=600&q=80', alt: 'Barista at work', tall: false },
-  { src: 'https://images.unsplash.com/photo-1523942839745-d39e1874d42e?w=600&q=80', alt: 'Coffee drying beds', tall: true },
-  { src: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80', alt: 'Roastery', tall: false },
+  { src: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80', alt: 'Coffee cherries', tall: false },
+  { src: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80', alt: 'Barista at work', tall: false },
+  { src: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80', alt: 'Coffee drying beds', tall: true },
+  { src: 'https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=600&q=80', alt: 'Roastery', tall: false },
 ]
 
 export default function Gallery() {

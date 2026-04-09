@@ -7,7 +7,7 @@ const steps = [
     subtitle: 'Altitude & terroir',
     description: 'Every Kōhi bean begins at altitude — between 1,200 and 2,200 metres. Thin air, volcanic soil, and dramatic temperature swings between day and night force the coffee cherry to develop slowly, concentrating sugars and acids into extraordinary complexity.',
     detail: 'We visit every farm we buy from, usually during harvest.',
-    image: 'https://images.unsplash.com/photo-1621330396173-e41b1cafd17f?w=700&q=80',
+    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=700&q=80',
   },
   {
     num: '02',
@@ -15,7 +15,7 @@ const steps = [
     subtitle: 'By hand, at peak ripeness',
     description: 'Only fully red cherries are picked. On steep hillside farms, machines are impossible — every cherry is selected by a trained picker who understands what ripe looks and feels like. This selective harvesting is the single most important factor in cup quality.',
     detail: 'One experienced picker harvests ~100kg of cherries per day.',
-    image: 'https://images.unsplash.com/photo-1559056961-1f4a52b034d0?w=700&q=80',
+    image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=700&q=80',
   },
   {
     num: '03',
@@ -23,7 +23,7 @@ const steps = [
     subtitle: 'Natural, washed, or honey',
     description: 'After harvest, we choose the processing method that best expresses each coffee\'s character. Natural drying amplifies fruit sweetness. Washed processing reveals clarity and acidity. Honey processing is the bridge — pulped but dried with mucilage intact.',
     detail: 'Processing takes 10–30 days depending on method and climate.',
-    image: 'https://images.unsplash.com/photo-1523942839745-d39e1874d42e?w=700&q=80',
+    image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=700&q=80',
   },
   {
     num: '04',
@@ -31,7 +31,7 @@ const steps = [
     subtitle: 'Small batch, by hand',
     description: 'Our roasters cup every green sample before committing to a roast profile. Temperature curves are built around the specific density, moisture content, and desired flavour of each lot. We roast light enough to honour the origin, and no darker than the coffee demands.',
     detail: 'Each batch rests 48 hours before we cup and approve it.',
-    image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=700&q=80',
+    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=700&q=80',
   },
   {
     num: '05',

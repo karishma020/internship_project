@@ -3,10 +3,10 @@ import { useScrollAnimation, useStaggerAnimation } from '../../hooks/useScrollAn
 import { MapPin } from 'lucide-react'
 
 const originImages = {
-  Ethiopia: 'https://images.unsplash.com/photo-1580933073521-dc49ac0d4e6a?w=600&q=80',
-  Colombia: 'https://images.unsplash.com/photo-1551452591-7a09e11ecf40?w=600&q=80',
-  Indonesia: 'https://images.unsplash.com/photo-1559056961-1f4a52b034d0?w=600&q=80',
-  Guatemala: 'https://images.unsplash.com/photo-1523942839745-d39e1874d42e?w=600&q=80',
+  Ethiopia: 'https://images.unsplash.com/photo-1559056961-1f4a52b034d0?w=600&q=80',
+  Colombia: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80',
+  Indonesia: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80',
+  Guatemala: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80',
 }
 
 export default function Origins() {
