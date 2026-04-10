@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { CartProvider } from './context/CartContext'
+import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import ScrollToTop from './components/ui/ScrollToTop'
@@ -18,29 +19,31 @@ export default function App() {
   const [showCart, setShowCart] = useState(false)
 
   return (
-    <CartProvider>
-      <div className="grain">
-        <Navbar onCartOpen={() => setShowCart(true)} />
-        <main>
-          {showCart ? (
-            <CartPage onClose={() => setShowCart(false)} />
-          ) : (
-            <>
-              <Hero />
-              <Story />
-              <Journey />
-              <Origins />
-              <Coffees />
-              <Roastery />
-              <Gallery />
-              <Ethics />
-              <Contact />
-            </>
-          )}
-        </main>
-        <Footer />
-        <ScrollToTop />
-      </div>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <div className="grain">
+          <Navbar onCartOpen={() => setShowCart(true)} />
+          <main>
+            {showCart ? (
+              <CartPage onClose={() => setShowCart(false)} />
+            ) : (
+              <>
+                <Hero />
+                <Story />
+                <Journey />
+                <Origins />
+                <Coffees />
+                <Roastery />
+                <Gallery />
+                <Ethics />
+                <Contact />
+              </>
+            )}
+          </main>
+          <Footer />
+          <ScrollToTop />
+        </div>
+      </CartProvider>
+    </AuthProvider>
   )
 }
