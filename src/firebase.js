@@ -12,8 +12,12 @@ const firebaseConfig = {
   appId: "1:591956312911:web:4a6ce6934f4b2b9805bb3a",
   measurementId: "G-FT07NEL4MB"
 };
+
 const app = initializeApp(firebaseConfig)
 
 export const auth           = getAuth(app)
 export const db             = getFirestore(app)
+
+// Google provider — custom params improve UX
 export const googleProvider = new GoogleAuthProvider()
+googleProvider.setCustomParameters({ prompt: 'select_account' })
