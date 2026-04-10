@@ -1,50 +1,3 @@
-// import { createContext, useContext, useState } from 'react'
-
-// const CartContext = createContext(null)
-
-// export function CartProvider({ children }) {
-//   const [items, setItems] = useState([])
-//   const [open, setOpen] = useState(false)
-
-//   function addItem(coffee, size = '250g', qty = 1) {
-//     setItems(prev => {
-//       const key = `${coffee.id}-${size}`
-//       const existing = prev.find(i => i.key === key)
-//       if (existing) {
-//         return prev.map(i => i.key === key ? { ...i, qty: i.qty + qty } : i)
-//       }
-//       const prices = { '250g': 18, '500g': 32, '1kg': 58 }
-//       return [...prev, { key, coffee, size, qty, price: prices[size] }]
-//     })
-//     setOpen(true)
-//   }
-
-//   function removeItem(key) {
-//     setItems(prev => prev.filter(i => i.key !== key))
-//   }
-
-//   function updateQty(key, qty) {
-//     if (qty < 1) { removeItem(key); return }
-//     setItems(prev => prev.map(i => i.key === key ? { ...i, qty } : i))
-//   }
-
-//   function clearCart() {
-//     setItems([])
-//   }
-
-//   const total = items.reduce((sum, i) => sum + i.price * i.qty, 0)
-//   const count = items.reduce((sum, i) => sum + i.qty, 0)
-
-//   return (
-//     <CartContext.Provider value={{ items, open, setOpen, addItem, removeItem, updateQty, clearCart, total, count }}>
-//       {children}
-//     </CartContext.Provider>
-//   )
-// }
-
-// export function useCart() {
-//   return useContext(CartContext)
-// }
 import { createContext, useContext, useState } from 'react'
 
 const CartContext = createContext(null)
@@ -73,11 +26,15 @@ export function CartProvider({ children }) {
     )
   }
 
+  const clearCart = () => {
+    setItems([])
+  }
+
   const totalItems = items.reduce((s, i) => s + i.qty, 0)
-  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0)
+  const subtotal = items.reduce((s, i) => s + (i.price || 0) * i.qty, 0)
 
   return (
-    <CartContext.Provider value={{ items, addToCart, removeFromCart, updateQty, totalItems, subtotal }}>
+    <CartContext.Provider value={{ items, addToCart, removeFromCart, updateQty, clearCart, totalItems, subtotal }}>
       {children}
     </CartContext.Provider>
   )

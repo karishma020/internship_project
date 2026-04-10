@@ -12,6 +12,8 @@ export const coffees = [
     description: 'Grown at extreme altitude in the birthplace of coffee. Natural processing amplifies the fruit-forward sweetness into something truly extraordinary.',
     image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&q=80',
     flag: '🇪🇹',
+    price: 699,
+    weight: '250g',
   },
   {
     id: 2,
@@ -26,6 +28,8 @@ export const coffees = [
     description: 'From small family farms nestled in the Andes. Careful wet processing reveals a clean, balanced cup with extraordinary clarity.',
     image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80',
     flag: '🇨🇴',
+    price: 649,
+    weight: '250g',
   },
   {
     id: 3,
@@ -37,9 +41,11 @@ export const coffees = [
     roastLevel: 4,
     process: 'Wet-Hulled',
     notes: ['Dark cocoa', 'Cedar', 'Tobacco'],
-    description: 'Sumatra\'s unique wet-hulled process creates a bold, earthy cup unlike anything else. Complex, full-bodied, and endlessly contemplative.',
+    description: "Sumatra's unique wet-hulled process creates a bold, earthy cup unlike anything else. Complex, full-bodied, and endlessly contemplative.",
     image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80',
     flag: '🇮🇩',
+    price: 749,
+    weight: '250g',
   },
   {
     id: 4,
@@ -54,6 +60,8 @@ export const coffees = [
     description: 'Volcanic soils and consistent microclimates make Antigua legendary. Honey processing bridges the gap between the fruit of natural and the clarity of washed.',
     image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80',
     flag: '🇬🇹',
+    price: 799,
+    weight: '250g',
   },
 ]
 
@@ -79,7 +87,7 @@ export const origins = [
   {
     name: 'Indonesia',
     region: 'Sumatra, Mandheling',
-    description: 'Indonesia\'s wet-hulled processing and volcanic terroir produce coffees of deep, complex character. Bold, earthy, and unlike anything from Africa or the Americas.',
+    description: "Indonesia's wet-hulled processing and volcanic terroir produce coffees of deep, complex character. Bold, earthy, and unlike anything from Africa or the Americas.",
     beans: 2,
     altitude: '1,000–1,600m',
     harvest: 'Sep – Mar',
@@ -88,7 +96,7 @@ export const origins = [
   {
     name: 'Guatemala',
     region: 'Antigua Valley',
-    description: 'Three volcanoes frame Antigua\'s valley, leaving mineral-rich ash in the soil. The consistent microclimate produces coffees of surprising sweetness and depth.',
+    description: "Three volcanoes frame Antigua's valley, leaving mineral-rich ash in the soil. The consistent microclimate produces coffees of surprising sweetness and depth.",
     beans: 2,
     altitude: '1,500–1,700m',
     harvest: 'Nov – Mar',

@@ -19,7 +19,7 @@ export default function Coffees() {
             </h2>
           </div>
           <p className="font-body font-light text-caramel max-w-sm leading-relaxed">
-            Four single-origins. Four growing regions. Four entirely different 
+            Four single-origins. Four growing regions. Four entirely different
             conversations between soil, climate, and the hands that tend them.
           </p>
         </div>
@@ -39,7 +39,7 @@ export default function Coffees() {
               Not sure where to start?
             </div>
             <p className="font-body font-light text-caramel text-sm leading-relaxed mb-6">
-              Our Tasting Collection includes a 50g sample of all four origins — 
+              Our Tasting Collection includes a 50g sample of all four origins —
               perfect for discovering your favourite.
             </p>
             <a href="#contact" className="btn-primary">

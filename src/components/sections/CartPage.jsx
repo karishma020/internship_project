@@ -6,10 +6,11 @@ const FREE_DELIVERY_THRESHOLD = 600
 const SHIPPING_FEE = 99
 const TAX_RATE = 0.05
 
+/* ── Step indicator ── */
 function StepIndicator({ step }) {
   const steps = ['Review', 'Shipping', 'Payment']
   return (
-    <div className="flex items-center justify-center gap-0 mb-12">
+    <div className="flex items-center justify-center mb-12">
       {steps.map((label, i) => {
         const num = i + 1
         const done = step > num
@@ -17,21 +18,31 @@ function StepIndicator({ step }) {
         return (
           <div key={label} className="flex items-center">
             <div className="flex flex-col items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-mono transition-all duration-300 ${
-                done ? 'bg-gold text-espresso' :
-                active ? 'bg-espresso text-cream' :
-                'bg-parchment text-caramel/40 border border-parchment'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-mono transition-all duration-300 ${
+                  done
+                    ? 'bg-gold text-espresso'
+                    : active
+                    ? 'bg-espresso text-cream'
+                    : 'bg-parchment text-caramel/40 border border-parchment'
+                }`}
+              >
                 {done ? <CheckCircle size={14} /> : num}
               </div>
-              <span className={`font-mono text-[10px] tracking-widest2 uppercase mt-1.5 ${
-                active ? 'text-espresso' : done ? 'text-gold' : 'text-caramel/30'
-              }`}>{label}</span>
+              <span
+                className={`font-mono text-[10px] tracking-widest2 uppercase mt-1.5 ${
+                  active ? 'text-espresso' : done ? 'text-gold' : 'text-caramel/30'
+                }`}
+              >
+                {label}
+              </span>
             </div>
             {i < steps.length - 1 && (
-              <div className={`w-16 md:w-24 h-px mx-2 mb-4 transition-colors duration-300 ${
-                step > num ? 'bg-gold' : 'bg-parchment'
-              }`} />
+              <div
+                className={`w-16 md:w-24 h-px mx-2 mb-4 transition-colors duration-300 ${
+                  step > num ? 'bg-gold' : 'bg-parchment'
+                }`}
+              />
             )}
           </div>
         )
@@ -40,6 +51,7 @@ function StepIndicator({ step }) {
   )
 }
 
+/* ── Order summary sidebar ── */
 function OrderSummary({ subtotal, shipping, tax, codFee = 0, buttonLabel, onAction, disabled }) {
   const total = subtotal + shipping + tax + codFee
   return (
@@ -82,8 +94,8 @@ function OrderSummary({ subtotal, shipping, tax, codFee = 0, buttonLabel, onActi
   )
 }
 
-/* ── Step 1: Cart Review ── */
-function ReviewStep({ onNext }) {
+/* ── Step 1: Review ── */
+function ReviewStep({ onNext, onBrowse }) {
   const { items, removeFromCart, updateQty, subtotal } = useCart()
   const shipping = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : SHIPPING_FEE
   const tax = Math.round(subtotal * TAX_RATE)
@@ -92,9 +104,15 @@ function ReviewStep({ onNext }) {
   if (items.length === 0) {
     return (
       <div className="text-center py-24">
-        <div className="font-display text-3xl italic text-espresso mb-4">Your cart is empty.</div>
-        <p className="font-body font-light text-caramel mb-8">Add some coffee to get started.</p>
-        <a href="#coffees" className="btn-primary">Browse Coffees</a>
+        <div className="font-display text-3xl italic text-espresso mb-4">
+          Your cart is empty.
+        </div>
+        <p className="font-body font-light text-caramel mb-8">
+          Add some coffee to get started.
+        </p>
+        <button onClick={onBrowse} className="btn-primary">
+          Browse Coffees
+        </button>
       </div>
     )
   }
@@ -104,7 +122,6 @@ function ReviewStep({ onNext }) {
       <div>
         <h2 className="font-display text-4xl text-espresso mb-8">The Harvest</h2>
 
-        {/* Free delivery banner */}
         {remaining > 0 ? (
           <div className="bg-espresso text-cream px-6 py-4 mb-6 font-body text-sm font-light">
             Add <span className="font-mono">₹{remaining}</span> more for free delivery.
@@ -117,7 +134,10 @@ function ReviewStep({ onNext }) {
 
         <div className="space-y-4">
           {items.map(item => (
-            <div key={item.id} className="bg-white border border-parchment p-5 flex gap-5 items-start">
+            <div
+              key={item.id}
+              className="bg-white border border-parchment p-5 flex gap-5 items-start"
+            >
               <img
                 src={item.image}
                 alt={item.name}
@@ -139,14 +159,16 @@ function ReviewStep({ onNext }) {
                   </button>
                 </div>
                 <div className="flex items-center justify-between mt-3">
-                  <div className="flex items-center gap-3 border border-parchment">
+                  <div className="flex items-center gap-0 border border-parchment">
                     <button
                       onClick={() => updateQty(item.id, -1)}
                       className="w-8 h-8 flex items-center justify-center text-caramel hover:text-espresso transition-colors"
                     >
                       <Minus size={12} />
                     </button>
-                    <span className="font-mono text-sm w-4 text-center text-espresso">{item.qty}</span>
+                    <span className="font-mono text-sm w-8 text-center text-espresso">
+                      {item.qty}
+                    </span>
                     <button
                       onClick={() => updateQty(item.id, 1)}
                       className="w-8 h-8 flex items-center justify-center text-caramel hover:text-espresso transition-colors"
@@ -154,7 +176,9 @@ function ReviewStep({ onNext }) {
                       <Plus size={12} />
                     </button>
                   </div>
-                  <span className="font-mono text-sm text-espresso">₹{item.price * item.qty}</span>
+                  <span className="font-mono text-sm text-espresso">
+                    ₹{item.price * item.qty}
+                  </span>
                 </div>
               </div>
             </div>
@@ -205,7 +229,9 @@ function ShippingStep({ onNext, onBack, shippingData, setShippingData }) {
                 <input
                   type={f.type || 'text'}
                   value={shippingData[f.id] || ''}
-                  onChange={e => setShippingData(prev => ({ ...prev, [f.id]: e.target.value }))}
+                  onChange={e =>
+                    setShippingData(prev => ({ ...prev, [f.id]: e.target.value }))
+                  }
                   placeholder={f.placeholder}
                   className="w-full bg-transparent border border-parchment px-4 py-3 font-body text-sm text-espresso placeholder-caramel/30 focus:outline-none focus:border-gold transition-colors"
                 />
@@ -213,7 +239,10 @@ function ShippingStep({ onNext, onBack, shippingData, setShippingData }) {
             ))}
           </div>
         </div>
-        <button onClick={onBack} className="flex items-center gap-2 mt-6 font-body text-sm text-caramel hover:text-espresso transition-colors">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 mt-6 font-body text-sm text-caramel hover:text-espresso transition-colors"
+        >
           <ArrowLeft size={14} /> Back
         </button>
       </div>
@@ -232,7 +261,7 @@ function ShippingStep({ onNext, onBack, shippingData, setShippingData }) {
 
 /* ── Step 3: Payment ── */
 function PaymentStep({ onBack, onComplete }) {
-  const { subtotal } = useCart()
+  const { subtotal, clearCart } = useCart()
   const [method, setMethod] = useState('upi')
   const shipping = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : SHIPPING_FEE
   const tax = Math.round(subtotal * TAX_RATE)
@@ -261,28 +290,23 @@ function PaymentStep({ onBack, onComplete }) {
                 }`}
               >
                 <span className="text-2xl">{m.icon}</span>
-                <span className="font-mono text-[10px] tracking-widest2 uppercase text-caramel">{m.label}</span>
+                <span className="font-mono text-[10px] tracking-widest2 uppercase text-caramel">
+                  {m.label}
+                </span>
               </button>
             ))}
           </div>
 
-          {method === 'cod' && (
-            <div className="bg-parchment/60 px-5 py-4 border-l-2 border-gold font-body text-sm text-caramel font-light">
-              A handling fee of ₹49 applies for COD orders.
-            </div>
-          )}
-          {method === 'upi' && (
-            <div className="bg-parchment/60 px-5 py-4 border-l-2 border-gold font-body text-sm text-caramel font-light">
-              You'll be redirected to complete UPI payment after placing the order.
-            </div>
-          )}
-          {method === 'card' && (
-            <div className="bg-parchment/60 px-5 py-4 border-l-2 border-gold font-body text-sm text-caramel font-light">
-              Secure card payment via Razorpay. All major cards accepted.
-            </div>
-          )}
+          <div className="bg-parchment/60 px-5 py-4 border-l-2 border-gold font-body text-sm text-caramel font-light">
+            {method === 'cod' && 'A handling fee of ₹49 applies for COD orders.'}
+            {method === 'upi' && "You'll be redirected to complete UPI payment after placing the order."}
+            {method === 'card' && 'Secure card payment via Razorpay. All major cards accepted.'}
+          </div>
         </div>
-        <button onClick={onBack} className="flex items-center gap-2 mt-6 font-body text-sm text-caramel hover:text-espresso transition-colors">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 mt-6 font-body text-sm text-caramel hover:text-espresso transition-colors"
+        >
           <ArrowLeft size={14} /> Back
         </button>
       </div>
@@ -293,14 +317,14 @@ function PaymentStep({ onBack, onComplete }) {
         tax={tax}
         codFee={codFee}
         buttonLabel="Complete Purchase"
-        onAction={onComplete}
+        onAction={() => { clearCart(); onComplete(); }}
       />
     </div>
   )
 }
 
-/* ── Confirmation ── */
-function ConfirmationStep() {
+/* ── Step 4: Confirmation ── */
+function ConfirmationStep({ onContinue }) {
   return (
     <div className="text-center py-24 max-w-lg mx-auto">
       <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -308,26 +332,40 @@ function ConfirmationStep() {
       </div>
       <div className="font-display text-4xl italic text-espresso mb-4">Order placed.</div>
       <p className="font-body font-light text-caramel leading-relaxed mb-3">
-        Thank you for your order. We'll roast your coffee fresh and dispatch it within 2–3 business days.
+        Thank you for your order. We'll roast your coffee fresh and dispatch it within
+        2–3 business days.
       </p>
       <p className="font-mono text-xs text-caramel/40 tracking-widest2 uppercase mb-10">
         Confirmation email sent
       </p>
-      <a href="#" className="btn-primary">Continue Shopping</a>
+      <button onClick={onContinue} className="btn-primary">
+        Continue Shopping
+      </button>
     </div>
   )
 }
 
-/* ── Main Cart Component ── */
-export default function CartPage() {
+/* ── Main export ── */
+export default function CartPage({ onClose }) {
   const [step, setStep] = useState(1)
   const [shippingData, setShippingData] = useState({})
+
+  const handleContinueShopping = () => {
+    onClose()
+    setTimeout(() => {
+      const el = document.getElementById('coffees')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }
 
   return (
     <section className="bg-mist min-h-screen pt-32 pb-24">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         {step <= 3 && <StepIndicator step={step} />}
-        {step === 1 && <ReviewStep onNext={() => setStep(2)} />}
+
+        {step === 1 && (
+          <ReviewStep onNext={() => setStep(2)} onBrowse={handleContinueShopping} />
+        )}
         {step === 2 && (
           <ShippingStep
             onNext={() => setStep(3)}
@@ -337,12 +375,9 @@ export default function CartPage() {
           />
         )}
         {step === 3 && (
-          <PaymentStep
-            onBack={() => setStep(2)}
-            onComplete={() => setStep(4)}
-          />
+          <PaymentStep onBack={() => setStep(2)} onComplete={() => setStep(4)} />
         )}
-        {step === 4 && <ConfirmationStep />}
+        {step === 4 && <ConfirmationStep onContinue={handleContinueShopping} />}
       </div>
     </section>
   )
