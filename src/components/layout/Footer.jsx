@@ -5,12 +5,11 @@ export default function Footer() {
     <footer className="bg-espresso text-cream/70">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
+
           <div className="md:col-span-2">
             <div className="font-display text-4xl text-cream mb-4">Kōhi</div>
             <p className="font-body font-light text-sm leading-relaxed text-cream/60 max-w-xs">
-              Single-origin specialty coffee. Sourced with intention, roasted with restraint, 
-              served with reverence.
+              Single-origin specialty coffee. Sourced with intention, roasted with restraint, served with reverence.
             </p>
             <div className="flex gap-4 mt-6">
               <a href="#" className="text-cream/40 hover:text-gold transition-colors"><Instagram size={18} /></a>
@@ -19,7 +18,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links */}
           <div>
             <div className="section-label text-cream/40 mb-4">Explore</div>
             <ul className="space-y-3">
@@ -39,12 +37,14 @@ export default function Footer() {
               <li className="leading-relaxed">12 Roastery Lane<br />Bengaluru, Karnataka<br />India 560001</li>
             </ul>
           </div>
+
         </div>
 
         <div className="border-t border-cream/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-mono text-xs text-cream/30">© 2026 Kōhi. All rights reserved.</p>
+          <a href="#" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="font-mono text-xs text-cream/30 hover:text-cream/60 transition-colors duration-200 cursor-pointer">© 2026 Kōhi. All rights reserved.</a>
           <p className="font-mono text-xs text-cream/30">From bean to cup — with love.</p>
         </div>
+
       </div>
     </footer>
   )
