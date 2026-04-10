@@ -1,144 +1,3 @@
-// // import { useState, useEffect } from 'react'
-// // import { Menu, X, ShoppingCart, LogOut, User } from 'lucide-react'
-// // import { useCart } from '../../context/CartContext'
-// // import { useAuth } from '../../context/AuthContext'
-// // import AuthModal from '../ui/AuthModal'
-
-// // const links = [
-// //   { label: 'Story', href: '#story' },
-// //   { label: 'Journey', href: '#journey' },
-// //   { label: 'Origins', href: '#origins' },
-// //   { label: 'Coffees', href: '#coffees' },
-// //   { label: 'Roastery', href: '#roastery' },
-// //   { label: 'Contact', href: '#contact' },
-// // ]
-
-// // export default function Navbar({ onCartOpen }) {
-// //   const [scrolled, setScrolled] = useState(false)
-// //   const [menuOpen, setMenuOpen] = useState(false)
-// //   const [showAuth, setShowAuth] = useState(false)
-// //   const { totalItems } = useCart()
-// //   const { user, logout } = useAuth()
-
-// //   useEffect(() => {
-// //     const onScroll = () => setScrolled(window.scrollY > 60)
-// //     window.addEventListener('scroll', onScroll)
-// //     return () => window.removeEventListener('scroll', onScroll)
-// //   }, [])
-
-// //   return (
-// //     <>
-// //       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-// //         scrolled ? 'bg-mist/95 backdrop-blur-sm border-b border-parchment' : 'bg-transparent'
-// //       }`}>
-// //         <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
-// //           {/* Logo */}
-// //           <a href="#" className="font-display text-2xl text-espresso tracking-wide">Kōhi</a>
-
-// //           {/* Desktop links */}
-// //           <ul className="hidden md:flex items-center gap-8">
-// //             {links.map(l => (
-// //               <li key={l.href}>
-// //                 <a href={l.href} className="font-body text-xs tracking-widest2 uppercase text-caramel hover:text-espresso transition-colors duration-200">
-// //                   {l.label}
-// //                 </a>
-// //               </li>
-// //             ))}
-// //           </ul>
-
-// //           {/* Right side */}
-// //           <div className="hidden md:flex items-center gap-3">
-// //             {/* Cart */}
-// //             <button
-// //               onClick={onCartOpen}
-// //               className="relative flex items-center gap-2 text-xs tracking-widest2 uppercase font-light px-4 py-2.5 text-espresso hover:text-caramel transition-colors"
-// //               aria-label="Open cart"
-// //             >
-// //               <ShoppingCart size={18} strokeWidth={1.5} />
-// //               <span>Cart</span>
-// //               {totalItems > 0 && (
-// //                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-espresso text-cream text-[10px] font-mono rounded-full flex items-center justify-center">
-// //                   {totalItems}
-// //                 </span>
-// //               )}
-// //             </button>
-
-// //             {/* Auth */}
-// //             {user ? (
-// //               <div className="flex items-center gap-2">
-// //                 {/* Avatar */}
-// //                 <div className="flex items-center gap-2 px-3 py-1.5 border border-parchment">
-// //                   {user.photoURL ? (
-// //                     <img src={user.photoURL} alt="avatar" className="w-5 h-5 rounded-full object-cover" />
-// //                   ) : (
-// //                     <User size={14} className="text-caramel" />
-// //                   )}
-// //                   <span className="font-mono text-xs text-espresso truncate max-w-[100px]">
-// //                     {user.displayName?.split(' ')[0] || user.email?.split('@')[0]}
-// //                   </span>
-// //                 </div>
-// //                 <button
-// //                   onClick={logout}
-// //                   className="flex items-center gap-1.5 text-xs tracking-widest2 uppercase font-light px-4 py-2.5 border border-espresso text-espresso hover:bg-espresso hover:text-cream transition-all duration-300"
-// //                 >
-// //                   <LogOut size={13} />
-// //                   Logout
-// //                 </button>
-// //               </div>
-// //             ) : (
-// //               <button
-// //                 onClick={() => setShowAuth(true)}
-// //                 className="text-xs tracking-widest2 uppercase font-light px-5 py-2.5 border border-espresso text-espresso hover:bg-espresso hover:text-cream transition-all duration-300"
-// //               >
-// //                 Sign In
-// //               </button>
-// //             )}
-// //           </div>
-
-// //           {/* Mobile: cart + hamburger */}
-// //           <div className="md:hidden flex items-center gap-3">
-// //             <button onClick={onCartOpen} className="relative text-espresso" aria-label="Open cart">
-// //               <ShoppingCart size={20} strokeWidth={1.5} />
-// //               {totalItems > 0 && (
-// //                 <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-espresso text-cream text-[9px] font-mono rounded-full flex items-center justify-center">
-// //                   {totalItems}
-// //                 </span>
-// //               )}
-// //             </button>
-// //             <button className="text-espresso" onClick={() => setMenuOpen(!menuOpen)}>
-// //               {menuOpen ? <X size={22} /> : <Menu size={22} />}
-// //             </button>
-// //           </div>
-// //         </nav>
-
-// //         {/* Mobile menu */}
-// //         {menuOpen && (
-// //           <div className="md:hidden bg-mist border-t border-parchment px-6 py-8 flex flex-col gap-6">
-// //             {links.map(l => (
-// //               <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-// //                 className="font-body text-sm tracking-widest2 uppercase text-caramel hover:text-espresso transition-colors">
-// //                 {l.label}
-// //               </a>
-// //             ))}
-// //             {user ? (
-// //               <button onClick={() => { logout(); setMenuOpen(false) }}
-// //                 className="flex items-center gap-2 font-body text-sm text-caramel hover:text-espresso transition-colors">
-// //                 <LogOut size={14} /> Sign Out
-// //               </button>
-// //             ) : (
-// //               <button onClick={() => { setShowAuth(true); setMenuOpen(false) }} className="btn-primary text-center mt-2">
-// //                 Sign In
-// //               </button>
-// //             )}
-// //           </div>
-// //         )}
-// //       </header>
-
-// //       {/* Auth Modal */}
-// //       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
-// //     </>
-// //   )
-// // }
 // // src/components/layout/Navbar.jsx
 // import { useState, useEffect } from 'react'
 // import { Menu, X, ShoppingCart, User, LogOut } from 'lucide-react'
@@ -155,6 +14,45 @@
 //   { label: 'Contact',  href: '#contact' },
 // ]
 
+// // Kōhi circular seal logo — swap size prop to control nav size
+// function KohiLogo({ size = 44 }) {
+//   return (
+//     <svg
+//       width={size}
+//       height={size}
+//       viewBox="0 0 120 120"
+//       xmlns="http://www.w3.org/2000/svg"
+//       aria-label="Kōhi Coffee"
+//     >
+//       <circle cx="60" cy="60" r="58" fill="#2C1A0E" />
+//       <circle cx="60" cy="60" r="50" fill="none" stroke="#C49A5A" strokeWidth="0.8" />
+//       <line x1="28" y1="44" x2="92" y2="44" stroke="#C49A5A" strokeWidth="0.6" />
+//       <line x1="28" y1="76" x2="92" y2="76" stroke="#C49A5A" strokeWidth="0.6" />
+//       <text
+//         x="60" y="58"
+//         fontFamily="'Cormorant Garamond', Georgia, serif"
+//         fontSize="28"
+//         fontWeight="400"
+//         fill="#F5ECD7"
+//         textAnchor="middle"
+//         dominantBaseline="middle"
+//       >
+//         Kōhi
+//       </text>
+//       <text
+//         x="60" y="70"
+//         fontFamily="sans-serif"
+//         fontSize="7"
+//         fill="#C49A5A"
+//         textAnchor="middle"
+//         letterSpacing="2"
+//       >
+//         コーヒー
+//       </text>
+//     </svg>
+//   )
+// }
+
 // export default function Navbar({ onCartOpen }) {
 //   const [scrolled, setScrolled]         = useState(false)
 //   const [open, setOpen]                 = useState(false)
@@ -169,7 +67,6 @@
 //     return () => window.removeEventListener('scroll', onScroll)
 //   }, [])
 
-//   // Close user menu on outside click
 //   useEffect(() => {
 //     if (!showUserMenu) return
 //     const handler = () => setShowUserMenu(false)
@@ -183,14 +80,25 @@
 //         scrolled ? 'bg-mist/95 backdrop-blur-sm border-b border-parchment' : 'bg-transparent'
 //       }`}>
 //         <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
-//           {/* Logo */}
-//           <a href="#" className="font-display text-2xl text-espresso tracking-wide">Kōhi</a>
+
+//           {/* Logo — SVG seal, slightly smaller on mobile */}
+//           <a href="#" aria-label="Kōhi home" className="flex items-center">
+//             <span className="block md:hidden">
+//               <KohiLogo size={52} />
+//             </span>
+//             <span className="hidden md:block">
+//               <KohiLogo size={64} />
+//             </span>
+//           </a>
 
 //           {/* Desktop links */}
 //           <ul className="hidden md:flex items-center gap-8">
 //             {links.map(l => (
 //               <li key={l.href}>
-//                 <a href={l.href} className="font-body text-xs tracking-widest2 uppercase text-caramel hover:text-espresso transition-colors duration-200">
+//                 <a
+//                   href={l.href}
+//                   className="font-body text-xs tracking-widest2 uppercase text-caramel hover:text-espresso transition-colors duration-200"
+//                 >
 //                   {l.label}
 //                 </a>
 //               </li>
@@ -269,8 +177,12 @@
 //         {open && (
 //           <div className="md:hidden bg-mist border-t border-parchment px-6 py-8 flex flex-col gap-6">
 //             {links.map(l => (
-//               <a key={l.href} href={l.href} onClick={() => setOpen(false)}
-//                 className="font-body text-sm tracking-widest2 uppercase text-caramel hover:text-espresso transition-colors">
+//               <a
+//                 key={l.href}
+//                 href={l.href}
+//                 onClick={() => setOpen(false)}
+//                 className="font-body text-sm tracking-widest2 uppercase text-caramel hover:text-espresso transition-colors"
+//               >
 //                 {l.label}
 //               </a>
 //             ))}
@@ -300,6 +212,7 @@
 //     </>
 //   )
 // }
+
 // src/components/layout/Navbar.jsx
 import { useState, useEffect } from 'react'
 import { Menu, X, ShoppingCart, User, LogOut } from 'lucide-react'
@@ -316,7 +229,6 @@ const links = [
   { label: 'Contact',  href: '#contact' },
 ]
 
-// Kōhi circular seal logo — swap size prop to control nav size
 function KohiLogo({ size = 44 }) {
   return (
     <svg
@@ -381,15 +293,15 @@ export default function Navbar({ onCartOpen }) {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled ? 'bg-mist/95 backdrop-blur-sm border-b border-parchment' : 'bg-transparent'
       }`}>
-        <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
+        {/* h-20 mobile / h-24 desktop — tall enough to contain the bigger logo */}
+        <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20 md:h-24">
 
-          {/* Logo — SVG seal, slightly smaller on mobile */}
-          <a href="#" aria-label="Kōhi home" className="flex items-center">
+          <a href="#" aria-label="Kōhi home" className="flex items-center shrink-0">
             <span className="block md:hidden">
-              <KohiLogo size={38} />
+              <KohiLogo size={60} />
             </span>
             <span className="hidden md:block">
-              <KohiLogo size={48} />
+              <KohiLogo size={76} />
             </span>
           </a>
 
@@ -409,7 +321,6 @@ export default function Navbar({ onCartOpen }) {
 
           {/* Desktop right: Cart + Auth */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Cart */}
             <button
               onClick={onCartOpen}
               className="relative flex items-center gap-2 text-xs tracking-widest2 uppercase font-light px-4 py-2.5 text-espresso hover:text-caramel transition-colors duration-200"
@@ -424,7 +335,6 @@ export default function Navbar({ onCartOpen }) {
               )}
             </button>
 
-            {/* Auth */}
             {user ? (
               <div className="relative" onClick={e => e.stopPropagation()}>
                 <button
