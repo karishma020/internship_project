@@ -109,7 +109,8 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
-  updateProfile,
+   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth'
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { auth, db, googleProvider } from '../firebase'
@@ -174,8 +175,12 @@ export function AuthProvider({ children }) {
     return signOut(auth)
   }
 
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email)
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, logout, resetPassword }}>
       {!loading && children}
     </AuthContext.Provider>
   )

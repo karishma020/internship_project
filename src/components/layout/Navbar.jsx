@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Menu, X, ShoppingCart, User, LogOut } from 'lucide-react'
 import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
-import LoginModal from '../cart/LoginModal'
+import AuthModal from '../ui/AuthModal'
 
 const links = [
   { label: 'Story',    href: '#story' },
@@ -204,7 +204,7 @@ export default function Navbar({ onCartOpen }) {
         )}
       </header>
 
-      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
+      {showLogin && <AuthModal onClose={() => setShowLogin(false)} />}
     </>
   )
 }
