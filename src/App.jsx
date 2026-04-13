@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
+import { ToastProvider } from './context/ToastContext'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import ScrollToTop from './components/ui/ScrollToTop'
@@ -15,36 +16,45 @@ import Ethics from './components/sections/Ethics'
 import Feedback from './components/sections/Feedback'
 import Contact from './components/sections/Contact'
 import CartPage from './components/sections/CartPage'
+import OrderHistory from './components/sections/Orderhistory'
 
 export default function App() {
-  const [showCart, setShowCart] = useState(false)
+  const [showCart, setShowCart]       = useState(false)
+  const [showOrders, setShowOrders]   = useState(false)
 
   return (
     <AuthProvider>
       <CartProvider>
-        <div className="grain">
-          <Navbar onCartOpen={() => setShowCart(true)} />
-          <main>
-            {showCart ? (
-              <CartPage onClose={() => setShowCart(false)} />
-            ) : (
-              <>
-                <Hero />
-                <Story />
-                <Journey />
-                <Origins />
-                <Coffees />
-                <Roastery />
-                <Gallery />
-                <Ethics />
-                <Feedback />
-                <Contact />
-              </>
-            )}
-          </main>
-          <Footer />
-          <ScrollToTop />
-        </div>
+        <ToastProvider>
+          <div className="grain">
+            <Navbar
+              onCartOpen={() => setShowCart(true)}
+              onOrdersOpen={() => setShowOrders(true)}
+            />
+            <main>
+              {showCart ? (
+                <CartPage onClose={() => setShowCart(false)} />
+              ) : showOrders ? (
+                <OrderHistory onClose={() => setShowOrders(false)} />
+              ) : (
+                <>
+                  <Hero />
+                  <Story />
+                  <Journey />
+                  <Origins />
+                  <Coffees />
+                  <Roastery />
+                  <Gallery />
+                  <Ethics />
+                  <Feedback />
+                  <Contact />
+                </>
+              )}
+            </main>
+            <Footer />
+            <ScrollToTop />
+          </div>
+        </ToastProvider>
       </CartProvider>
     </AuthProvider>
   )
