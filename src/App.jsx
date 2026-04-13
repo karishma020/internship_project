@@ -12,6 +12,7 @@ import Coffees from './components/sections/Coffees'
 import Roastery from './components/sections/Roastery'
 import Gallery from './components/sections/Gallery'
 import Ethics from './components/sections/Ethics'
+import Feedback from './components/sections/Feedback'
 import Contact from './components/sections/Contact'
 import CartPage from './components/sections/CartPage'
 
@@ -36,6 +37,7 @@ export default function App() {
                 <Roastery />
                 <Gallery />
                 <Ethics />
+                <Feedback />
                 <Contact />
               </>
             )}
