@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
-import { ToastProvider } from './context/ToastContext'
+import { ToastProvider } from './context/Toastcontext'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import ScrollToTop from './components/ui/ScrollToTop'
